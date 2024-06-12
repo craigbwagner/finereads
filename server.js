@@ -8,8 +8,8 @@ const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
-// const isSignedIn = require('./middleware/is-signed-in.js');
-// const passUserToView = require('./middleware/pass-user-to-view.js');
+const isSignedIn = require('./middleware/is-signed-in.js');
+const passUserToView = require('./middleware/pass-user-to-view.js');
 
 const authController = require('./controllers/auth.js');
 
@@ -35,16 +35,16 @@ app.use(
 	})
 );
 
-// app.use(passUserToView);
+app.use(passUserToView);
 
 app.get('/', (req, res) => {
 	res.render('index.ejs');
 });
 
 app.use('/auth', authController);
-// app.use('/', require('./routes/books.js'));
-// app.use(isSignedIn);
-// app.use('/users/:userId/applications', require('./routes/applications.js'));
+app.use('/', require('./routes/books.js'));
+app.use(isSignedIn);
+app.use('/users/:userId/books', require('./routes/books.js'));
 
 app.listen(port, () => {
 	console.log(`The express app is ready on port ${port}!`);
