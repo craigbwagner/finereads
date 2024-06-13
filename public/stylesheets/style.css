@@ -26,3 +26,17 @@ nav {
     padding: 10px 20px;
     background-color: #333;
 }
+
+#search-form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-items: center;
+    align-items: flex-start;
+}
+
+#search-button {
+    margin-top: 10px;
+    width: 100px;
+    align-self: center;
+}
