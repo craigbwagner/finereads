@@ -9,5 +9,19 @@
   <%- include('../partials/_navbar.ejs') %>
   <h1>Search Results</h1>
   <a href='/books/search'>Search again</a>
+  <div id='search-results-container'>
+    <% searchResults.items.forEach(book => { %>
+      <div class='book-container'>
+        <a href='/books/show'><h2><%= book.volumeInfo.title %></h2></a>
+        <% book.volumeInfo.authors.forEach(author => { %>
+          <h4 class='author-names'><%= author %></h4>
+        <% }) %>
+        <h3><%= book.volumeInfo.author %></h3>
+        <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
+        <p>ISBN 10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+        <p class='book-description'><%= book.volumeInfo.description %></p>
+      </div>
+    <% }) %>
+  </div>
 </body>
 </html>
