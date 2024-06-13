@@ -33,6 +33,7 @@ nav {
     width: fit-content;
     justify-items: center;
     align-items: flex-start;
+    margin-left: 60px;
 }
 
 #search-button {
