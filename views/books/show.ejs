@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= book.volumeInfo.title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1><%= book.volumeInfo.title %></h1>
+  <div>
+    <h2><%= book.volumeInfo.title %></h2>
+    <% book.volumeInfo.authors.forEach(author => { %>
+      <h4 class='author-names'><%= author %></h4>
+    <% }) %>
+    <h3><%= book.volumeInfo.author %></h3>
+    <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
+    <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
+    <div>
+      <h3>Book Details</h3>
+      <p>ISBN 10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+      <p>ISBN 13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+      <p><strong>Publisher:</strong> <%= book.volumeInfo.publisher %></p>
+      <p><strong>Year Published:</strong> <%= book.volumeInfo.publishedDate %></p>
+      <p><strong>Page Count:</strong> <%= book.volumeInfo.pageCount %></p>
+    </div>
+    <h3>Description</h3>
+    <p class='book-description'><%= book.volumeInfo.description %></p>
+  </div>
+</body>
+</html>
