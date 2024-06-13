@@ -1,3 +1,4 @@
+const { json } = require('express');
 const User = require('../models/user');
 
 const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
@@ -57,22 +58,9 @@ async function searchResults(req, res) {
 		} else {
 			return res.redirect('/books/search');
 		}
-		console.log(searchURL);
-		const foundBooks = await fetch(searchURL)
-			.then((response) => {
-				if (response.ok) {
-					return response.json();
-				} else {
-					throw new Error('API request failed');
-				}
-			})
-			.then((data) => {
-				console.log(data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-		res.render('books/results.ejs', { searchQuery: req.query, foundBooks });
+		const response = await fetch(searchURL);
+		const jsonResponse = await response.json();
+		res.render('books/results.ejs', { searchQuery: req.query, searchResults: jsonResponse });
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
