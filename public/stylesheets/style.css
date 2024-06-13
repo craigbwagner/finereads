@@ -6,4 +6,15 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: #483939;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+input {
+    font-family: 'Poppins', sans-serif;
+    background-color: aliceblue;
 }
