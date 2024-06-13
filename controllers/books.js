@@ -1,5 +1,7 @@
 const User = require('../models/user');
 
+const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+
 async function index(req, res) {
 	try {
 		const currentUser = await User.findById(req.session.user._id);
@@ -32,30 +34,45 @@ function bookSearch(req, res) {
 	}
 }
 
-function searchResults(req, res) {
+async function searchResults(req, res) {
 	try {
-		let searchURL = 'https://www.googleapis.com/books/v1/volumes';
+		let searchURL = `https://www.googleapis.com/books/v1/volumes?maxResults=20&key=${GOOGLE_BOOKS_API_KEY}`;
 		const title = req.query.title;
 		const author = req.query.author;
 		const isbn = req.query.isbn;
 		if (title !== '' && author !== '' && isbn !== '') {
-			searchURL += `?q=intitle:${title}+inauthor:${author}+isbn:${isbn}&maxResults=20`;
+			searchURL += `&q=intitle:${title}+inauthor:${author}+isbn:${isbn}`;
 		} else if (title !== '' && author !== '') {
-			searchURL += `?q=intitle:${title}+inauthor:${author}&maxResults=20`;
+			searchURL += `&q=intitle:${title}+inauthor:${author}`;
 		} else if (title !== '' && isbn !== '') {
-			searchURL += `?q=intitle:${title}+isbn:${isbn}&maxResults=20`;
+			searchURL += `&q=intitle:${title}+isbn:${isbn}`;
 		} else if (author !== '' && isbn !== '') {
-			searchURL += `?q=inauthor:${author}+isbn:${isbn}&maxResults=20`;
+			searchURL += `&q=inauthor:${author}+isbn:${isbn}`;
 		} else if (title !== '') {
-			searchURL += `?q=intitle:${title}&maxResults=20`;
+			searchURL += `&q=intitle:${title}`;
 		} else if (author !== '') {
-			searchURL += `?q=inauthor:${author}&maxResults=20`;
+			searchURL += `&q=inauthor:${author}`;
 		} else if (isbn !== '') {
-			searchURL += `?q=isbn:${isbn}&maxResults=20`;
+			searchURL += `&q=isbn:${isbn}`;
 		} else {
 			return res.redirect('/books/search');
 		}
-		res.render('books/results.ejs', { searchQuery: req.body, searchURL });
+		console.log(searchURL);
+		const foundBooks = await fetch(searchURL)
+			.then((response) => {
+				if (response.ok) {
+					return response.json();
+				} else {
+					throw new Error('API request failed');
+				}
+			})
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+		res.render('books/results.ejs', { searchQuery: req.query, foundBooks });
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
