@@ -5,6 +5,6 @@ const booksCtrl = require('../controllers/books');
 router.get('/', booksCtrl.index);
 router.get('/search', booksCtrl.bookSearch);
 router.get('/results', booksCtrl.searchResults);
-// router.get('/:bookId', booksCtrl.show);
+router.get('/show/:bookId', booksCtrl.showBook);
 
 module.exports = router;
