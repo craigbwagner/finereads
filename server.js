@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authController);
-app.use('/', require('./routes/books.js'));
+app.use('/books', require('./routes/books.js'));
 app.use(isSignedIn);
 app.use('/users/:userId/books', require('./routes/books.js'));
 
