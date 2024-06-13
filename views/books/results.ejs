@@ -19,6 +19,7 @@
         <h3><%= book.volumeInfo.author %></h3>
         <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
         <p>ISBN 10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+        <h3>Description</h3>
         <p class='book-description'><%= book.volumeInfo.description %></p>
       </div>
     <% }) %>
