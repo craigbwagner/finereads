@@ -12,7 +12,7 @@
   <div id='search-results-container'>
     <% searchResults.items.forEach(book => { %>
       <div class='book-container'>
-        <a href='/books/show'><h2><%= book.volumeInfo.title %></h2></a>
+        <a href='/books/show/<%= book.id %>'><h2><%= book.volumeInfo.title %></h2></a>
         <% book.volumeInfo.authors.forEach(author => { %>
           <h4 class='author-names'><%= author %></h4>
         <% }) %>
