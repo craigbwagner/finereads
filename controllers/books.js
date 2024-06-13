@@ -39,21 +39,21 @@ function searchResults(req, res) {
 		const author = req.query.author;
 		const isbn = req.query.isbn;
 		if (title !== '' && author !== '' && isbn !== '') {
-			searchURl += `?q=intitle:${title}+inauthor:${author}+isbn:${isbn}&maxResults=20`;
+			searchURL += `?q=intitle:${title}+inauthor:${author}+isbn:${isbn}&maxResults=20`;
 		} else if (title !== '' && author !== '') {
-			searchURl += `?q=intitle:${title}+inauthor:${author}&maxResults=20`;
+			searchURL += `?q=intitle:${title}+inauthor:${author}&maxResults=20`;
 		} else if (title !== '' && isbn !== '') {
-			searchURl += `?q=intitle:${title}+isbn:${isbn}&maxResults=20`;
+			searchURL += `?q=intitle:${title}+isbn:${isbn}&maxResults=20`;
 		} else if (author !== '' && isbn !== '') {
-			searchURl += `?q=inauthor:${author}+isbn:${isbn}&maxResults=20`;
+			searchURL += `?q=inauthor:${author}+isbn:${isbn}&maxResults=20`;
 		} else if (title !== '') {
-			searchURl += `?q=intitle:${title}&maxResults=20`;
+			searchURL += `?q=intitle:${title}&maxResults=20`;
 		} else if (author !== '') {
-			searchURl += `?q=inauthor:${author}&maxResults=20`;
+			searchURL += `?q=inauthor:${author}&maxResults=20`;
 		} else if (isbn !== '') {
-			searchURl += `?q=isbn:${isbn}&maxResults=20`;
+			searchURL += `?q=isbn:${isbn}&maxResults=20`;
 		} else {
-			return res.redirect('/');
+			return res.redirect('/books/search');
 		}
 		res.render('books/results.ejs', { searchQuery: req.body, searchURL });
 	} catch (err) {
