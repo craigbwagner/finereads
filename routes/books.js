@@ -3,11 +3,7 @@ const router = express.Router();
 const booksCtrl = require('../controllers/books');
 
 router.get('/', booksCtrl.index);
-router.get('/new', booksCtrl.new);
-router.post('/', booksCtrl.create);
-router.get('/:applicationId', booksCtrl.show);
-router.delete('/:applicationId', booksCtrl.delete);
-router.get('/:applicationId/edit', booksCtrl.edit);
-router.put('/:applicationId', booksCtrl.update);
+router.get('/search', booksCtrl.bookSearch);
+router.get('/:bookId', booksCtrl.show);
 
 module.exports = router;
