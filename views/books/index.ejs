@@ -3,11 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= name %>'s Books</title>
+  <title><%= currentUser.username %>'s Books</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1><%= name %>'s Books</h1>
+  <h1><%= currentUser.username %>'s Books</h1>
+  <div>
+    <h2>Current reads:</h2>
+    <div>
+      <% currentReads.forEach(book => { %>
+        <div>
+          <img src='<%= book.imageLink %>'>
+          <p><%= book.title %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <div>
+    <h2>Want to Read:</h2>
+    <div>
+      <% toReads.forEach(book => { %>
+        <div>
+          <img src='<%= book.imageLink %>'>
+          <p><%= book.title %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+  <div>
+    <h2>Read Books:</h2>
+    <div>
+      <% readBooks.forEach(book => { %>
+        <div>
+          <img src='<%= book.imageLink %>'>
+          <p><%= book.title %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
 </body>
 </html>
