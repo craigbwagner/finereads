@@ -35,9 +35,7 @@ async function searchResults(req, res) {
 async function showBook(req, res) {
 	try {
 		const selectedBookId = req.params.bookId;
-		const bookURL = `https://www.googleapis.com/books/v1/volumes/${selectedBookId}`;
-		const response = await fetch(bookURL);
-		const jsonResponse = await response.json();
+        const jsonResponse = await googleBooksAPI.show(selectedBookId);
 		res.render('books/show.ejs', { book: jsonResponse });
 	} catch (err) {
 		console.log(err);

@@ -30,4 +30,11 @@ async function search(query) {
 	return jsonResponse;
 }
 
-module.exports = { search };
+async function show(bookId) {
+	const bookURL = `https://www.googleapis.com/books/v1/volumes/${bookId}`;
+	const response = await fetch(bookURL);
+	const jsonResponse = await response.json();
+	return jsonResponse;
+}
+
+module.exports = { search, show };
