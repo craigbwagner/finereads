@@ -2,7 +2,7 @@
   <a href='/' id='navbar-title'>Finereads</a>
   <% if(user) {%>
   <a href='/books/search'>Search</a>
-  <a href="/users/<%=user._id%>/books">Your Books</a>
+  <a href="/books/users/<%=user._id%>">Your Books</a>
   <a href="/auth/sign-out">Sign Out</a>
   <% } else { %>
   <a href="/auth/sign-in">Sign In</a>
