@@ -15,6 +15,7 @@ const bookSchema = mongoose.Schema(
 		// description: String,
 		shelf: { type: String, default: 'to-read', enum: ['to-read', 'reading', 'read'] },
 		userRating: Number,
+		userReview: String,
 		// googleBooksURL: String,
 	},
 	{ timestamps: { updatedAt: 'updated_at', createdAt: 'created_at' } }
