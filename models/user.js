@@ -13,7 +13,7 @@ const bookSchema = mongoose.Schema(
 		// publishedDate: String,
 		// pageCount: Number,
 		// description: String,
-		shelf: { type: String, default: 'to-read', enum: ['to-read', 'reading', 'read'] },
+		shelf: { type: String, enum: ['to-read', 'reading', 'read'] },
 		userRating: Number,
 		userReview: String,
 		// googleBooksURL: String,
