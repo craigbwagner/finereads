@@ -1,7 +1,5 @@
-const { json } = require('express');
 const User = require('../models/user');
-
-const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
+const googleBooksAPI = require('../services/google-books-API');
 
 async function index(req, res) {
 	try {
@@ -26,30 +24,8 @@ function bookSearch(req, res) {
 
 async function searchResults(req, res) {
 	try {
-		let searchURL = `https://www.googleapis.com/books/v1/volumes?maxResults=20&key=${GOOGLE_BOOKS_API_KEY}`;
-		const title = req.query.title;
-		const author = req.query.author;
-		const isbn = req.query.isbn;
-		if (title !== '' && author !== '' && isbn !== '') {
-			searchURL += `&q=intitle:${title}+inauthor:${author}+isbn:${isbn}`;
-		} else if (title !== '' && author !== '') {
-			searchURL += `&q=intitle:${title}+inauthor:${author}`;
-		} else if (title !== '' && isbn !== '') {
-			searchURL += `&q=intitle:${title}+isbn:${isbn}`;
-		} else if (author !== '' && isbn !== '') {
-			searchURL += `&q=inauthor:${author}+isbn:${isbn}`;
-		} else if (title !== '') {
-			searchURL += `&q=intitle:${title}`;
-		} else if (author !== '') {
-			searchURL += `&q=inauthor:${author}`;
-		} else if (isbn !== '') {
-			searchURL += `&q=isbn:${isbn}`;
-		} else {
-			return res.redirect('/books/search');
-		}
-		const response = await fetch(searchURL);
-		const jsonResponse = await response.json();
-		res.render('books/results.ejs', { searchQuery: req.query, searchResults: jsonResponse });
+		const searchResults = await googleBooksAPI.search(req.query);
+		res.render('books/results.ejs', { searchResults });
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
