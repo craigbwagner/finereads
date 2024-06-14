@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const booksCtrl = require('../controllers/books');
 
-router.get('/', booksCtrl.index);
+router.get('/users/:userId', booksCtrl.index);
 router.get('/search', booksCtrl.bookSearch);
 router.get('/results', booksCtrl.searchResults);
 router.get('/show/:bookId', booksCtrl.showBook);
+router.post('/:bookId/users/:userId', booksCtrl.addToShelf);
 
 module.exports = router;

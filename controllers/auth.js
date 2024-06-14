@@ -70,7 +70,7 @@ router.post('/sign-in', async (req, res) => {
 		};
 
 		req.session.save(() => {
-			res.redirect('/');
+			res.redirect('/books/users/<%= req.session.user._id');
 		});
 	} catch (error) {
 		console.log(error);

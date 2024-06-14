@@ -21,16 +21,33 @@
     <% }) %>
     <h3><%= book.volumeInfo.author %></h3>
     <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
+    <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
+      <label for='shelf'>Add to Shelf:</label>
+      <select name='shelf'>
+        <option value='to-read'>Want to Read</option>
+        <option value='reading'>Currently Reading</option>
+        <option value='read'>Read</option>
+      </select>
+      <button type='submit'>Add to My Books</button>
+    </form>
+    <form action="/books/<%= book.id %>/reviews" method="POST">
+      <label for='rating'>Rating:</label>
+      <input type='number' name='rating' min='1' max='5' required>
+      <br />
+      <label for='review'>Review:</label>
+      <textarea name='review' required></textarea>
+      <br />
+      <button type='submit'>Submit Review</button>
     <div>
       <h3>Book Details</h3>
-      <p>ISBN 10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
-      <p>ISBN 13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+      <p>ISBN-10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+      <p>ISBN-13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
       <p><strong>Publisher:</strong> <%= book.volumeInfo.publisher %></p>
       <p><strong>Year Published:</strong> <%= book.volumeInfo.publishedDate %></p>
       <p><strong>Page Count:</strong> <%= book.volumeInfo.pageCount %></p>
     </div>
     <h3>Description</h3>
-    <p class='book-description'><%= book.volumeInfo.description %></p>
+    <p class='book-description'><%- book.volumeInfo.description %></p>
     <h3>Categories</h3>
     <ul>
       <% book.volumeInfo.categories.forEach(category => { %>
