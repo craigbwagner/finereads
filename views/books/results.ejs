@@ -23,10 +23,13 @@
         <% } else {%>
           <img src='/images/icons8-book-96.png'
         <% } %>
-        <p>ISBN 10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
-        <p>ISBN 13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+        <% if (book.volumeInfo.industryIdentifiers[0]?.identifier) { %>
+          <p class='book-description'>ISBN-10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+        <% } %>
+        <% if (book.volumeInfo.industryIdentifiers[1]?.identifier) { %>
+          <p class='book-description'>ISBN-13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+        <% } %>
         <% if (book.searchInfo?.textSnippet) { %>
-          <h3>Description</h3>
           <p class='book-description'><%= book.searchInfo.textSnippet %></p>
         <% } %>
       </div>
