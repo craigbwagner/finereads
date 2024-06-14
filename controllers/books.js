@@ -15,17 +15,6 @@ async function index(req, res) {
 	}
 }
 
-// async function show(req, res) {
-// 	try {
-// 		const currentUser = await User.findById(req.session.user._id);
-// 		const book = currentUser.books.id(req.params.bookId);
-// 		res.render('books/show.ejs', { book });
-// 	} catch (err) {
-// 		console.log(err);
-// 		res.redirect('/');
-// 	}
-// }
-
 function bookSearch(req, res) {
 	try {
 		res.render('books/search.ejs');
