@@ -9,13 +9,17 @@
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1><%= book.volumeInfo.title %></h1>
+  <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
+    <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
+  <% } else {%>
+    <img src='/images/icons8-book-96.png'
+  <% } %>
   <div>
     <h2><%= book.volumeInfo.title %></h2>
     <% book.volumeInfo.authors.forEach(author => { %>
       <h4 class='author-names'><%= author %></h4>
     <% }) %>
     <h3><%= book.volumeInfo.author %></h3>
-    <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
     <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
     <div>
       <h3>Book Details</h3>

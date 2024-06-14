@@ -18,10 +18,17 @@
           <h4 class='author-names'><%= author %></h4>
         <% }) %>
         <h3><%= book.volumeInfo.author %></h3>
-        <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
+        <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
+          <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
+        <% } else {%>
+          <img src='/images/icons8-book-96.png'
+        <% } %>
         <p>ISBN 10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
-        <h3>Description</h3>
-        <p class='book-description'><%= book.volumeInfo.description %></p>
+        <p>ISBN 13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+        <% if (book.searchInfo?.textSnippet) { %>
+          <h3>Description</h3>
+          <p class='book-description'><%= book.searchInfo.textSnippet %></p>
+        <% } %>
       </div>
     <% }) %>
   </div>
