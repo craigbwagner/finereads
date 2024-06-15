@@ -11,7 +11,7 @@
   <h1><%= currentUser.username %>'s Books</h1>
   <div>
     <h2>Current reads:</h2>
-    <div>
+    <div class='user-books'>
       <% currentReads.forEach(book => { %>
         <div>
           <img src='<%= book.imageLink %>'>
@@ -22,7 +22,7 @@
   </div>
   <div>
     <h2>Want to Read:</h2>
-    <div>
+    <div class='user-books'>
       <% toReads.forEach(book => { %>
         <div>
           <img src='<%= book.imageLink %>'>
@@ -33,7 +33,7 @@
   </div>
   <div>
     <h2>Read Books:</h2>
-    <div>
+    <div class='user-books'>
       <% readBooks.forEach(book => { %>
         <div>
           <img src='<%= book.imageLink %>'>
