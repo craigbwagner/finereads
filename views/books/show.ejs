@@ -15,11 +15,9 @@
     <img src='/images/icons8-book-96.png'
   <% } %>
   <div>
-    <h2><%= book.volumeInfo.title %></h2>
     <% book.volumeInfo.authors.forEach(author => { %>
-      <h4 class='author-names'><%= author %></h4>
+      <h3 class='author-names'><%= author %></h3>
     <% }) %>
-    <h3><%= book.volumeInfo.author %></h3>
     <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
     <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
       <label for='shelf'>Add to Shelf:</label>
