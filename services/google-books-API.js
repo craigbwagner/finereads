@@ -4,10 +4,20 @@ const GOOGLE_BOOKS_API_KEY = process.env.GOOGLE_BOOKS_API_KEY;
 
 async function search(query) {
 	let searchURL = `https://www.googleapis.com/books/v1/volumes?maxResults=20&key=${GOOGLE_BOOKS_API_KEY}`;
+    let title = '';
+	let author = '';
+	let isbn = '';
 
-	const title = query.title;
-	const author = query.author;
-	const isbn = query.isbn;
+	console.log(query);
+	if (query.title !== undefined) {
+		title = query.title;
+	}
+	if (query.author !== undefined) {
+		author = query.author;
+	}
+	if (query.isbn !== undefined) {
+		isbn = query.isbn;
+	}
 	if (title !== '' && author !== '' && isbn !== '') {
 		searchURL += `&q=intitle:${title}+inauthor:${author}+isbn:${isbn}`;
 	} else if (title !== '' && author !== '') {
@@ -22,11 +32,12 @@ async function search(query) {
 		searchURL += `&q=inauthor:${author}`;
 	} else if (isbn !== '') {
 		searchURL += `&q=isbn:${isbn}`;
-	} else {
-		return res.redirect('/books/search');
 	}
 	const response = await fetch(searchURL);
-	const jsonResponse = await response.json();
+	let jsonResponse = await response.json();
+	if (jsonResponse.error?.code === 400) {
+		jsonResponse = undefined;
+	}
 	return jsonResponse;
 }
 

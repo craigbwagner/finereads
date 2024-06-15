@@ -37,7 +37,11 @@ function bookSearch(req, res) {
 async function searchResults(req, res) {
 	try {
 		const searchResults = await googleBooksAPI.search(req.query);
-		res.render('books/results.ejs', { searchResults });
+		if (searchResults === undefined) {
+			res.redirect('/books/search');
+		} else {
+			res.render('books/results.ejs', { searchResults });
+		}
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
@@ -50,7 +54,7 @@ async function showBook(req, res) {
 		const selectedBookId = req.params.bookId;
 		const selectedBook = await googleBooksAPI.show(selectedBookId);
 		let isShelved = false;
-        let shelfStatus = 'to-read';
+		let shelfStatus = 'to-read';
 
 		currentUser.shelvedBooks.forEach((book) => {
 			if (selectedBookId === book.googleBooksId) {

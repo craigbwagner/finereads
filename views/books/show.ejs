@@ -17,7 +17,7 @@
   <div>
     <% if (book.volumeInfo?.authors) {%>
       <% book.volumeInfo.authors.forEach(author => { %>
-        <h3 class='author-names'><%= author %></h3>
+        <a href='/books/results?author=<%= author %>'><h3 class='author-names'><%= author %></h3></a>
     <% })} %>
     <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
     <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
