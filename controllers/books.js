@@ -49,7 +49,13 @@ async function showBook(req, res) {
 		const currentUser = await User.findById(req.session.user._id);
 		const selectedBookId = req.params.bookId;
 		const selectedBook = await googleBooksAPI.show(selectedBookId);
-		res.render('books/show.ejs', { book: selectedBook, currentUser });
+		let isShelved = false;
+		currentUser.shelvedBooks.forEach((book) => {
+			if (selectedBookId === book.googleBooksId) {
+				isShelved = true;
+			}
+		});
+		res.render('books/show.ejs', { book: selectedBook, currentUser, isShelved });
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
@@ -90,10 +96,25 @@ async function addToShelf(req, res) {
 	}
 }
 
+async function removeBook(req, res) {
+	try {
+		const currentUser = await User.findById(req.params.userId);
+		currentUser.shelvedBooks = currentUser.shelvedBooks.filter((book) => {
+			return book.googleBooksId !== req.params.bookId;
+		});
+		await currentUser.save();
+		res.redirect(`/books/show/${req.params.bookId}`);
+	} catch (err) {
+		console.log(err);
+		res.redirect(`/books/show/${req.params.bookId}`);
+	}
+}
+
 module.exports = {
 	index,
 	showBook,
 	bookSearch,
 	searchResults,
 	addToShelf,
+	removeBook,
 };
