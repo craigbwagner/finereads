@@ -16,7 +16,7 @@
         <a href='/books/show/<%= book.id %>'><h2><%= book.volumeInfo.title %></h2></a>
         <% if (book.volumeInfo?.authors) {%>
           <% book.volumeInfo.authors.forEach(author => { %>
-            <h4 class='author-names'><%= author %></h4>
+            <a href='/books/results?author=<%= author %>'><h4 class='author-names'><%= author %></h4></a>
         <% })} %>
         <h3><%= book.volumeInfo.author %></h3>
         <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
