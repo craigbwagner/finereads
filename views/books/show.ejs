@@ -22,10 +22,23 @@
     <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
     <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
       <label for='shelf'>Add to Shelf:</label>
+      <%= console.log(shelfStatus); %>
       <select name='shelf'>
-        <option value='to-read'>Want to Read</option>
-        <option value='reading'>Currently Reading</option>
-        <option value='read'>Read</option>
+        <% if (shelfStatus === 'to-read') { %>
+          <option value="to-read" selected>Want to Read</option>
+        <% } else { %>
+          <option value='to-read'>Want to Read</option>
+        <% } %>
+        <% if (shelfStatus === 'reading') { %>
+          <option value="reading" selected>Reading</option>
+        <% } else { %>
+          <option value='reading'>Reading</option>
+        <% } %>
+        <% if (shelfStatus === 'read') { %>
+          <option value="read" selected>Read</option>
+        <% } else { %>
+          <option value='read'>Read</option>
+        <% } %>
       </select>
       <button type='submit'>Add to My Books</button>
     </form>

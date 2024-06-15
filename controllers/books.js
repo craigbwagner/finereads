@@ -50,12 +50,21 @@ async function showBook(req, res) {
 		const selectedBookId = req.params.bookId;
 		const selectedBook = await googleBooksAPI.show(selectedBookId);
 		let isShelved = false;
+        let shelfStatus = 'to-read';
+
 		currentUser.shelvedBooks.forEach((book) => {
 			if (selectedBookId === book.googleBooksId) {
 				isShelved = true;
 			}
 		});
-		res.render('books/show.ejs', { book: selectedBook, currentUser, isShelved });
+		if (isShelved) {
+			const shelvedBook = currentUser.shelvedBooks.filter((book) => {
+				return book.googleBooksId === selectedBookId;
+			});
+			shelfStatus = shelvedBook[0].shelf;
+		}
+
+		res.render('books/show.ejs', { book: selectedBook, currentUser, isShelved, shelfStatus });
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
