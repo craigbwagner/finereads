@@ -8,7 +8,6 @@ async function search(query) {
 	let author = '';
 	let isbn = '';
 
-	console.log(query);
 	if (query.title !== undefined) {
 		title = query.title;
 	}
