@@ -20,9 +20,9 @@
         <% })} %>
         <h3><%= book.volumeInfo.author %></h3>
         <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
-          <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
+          <a href='/books/show/<%= book.id %>'><img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'></a>
         <% } else {%>
-          <img src='/images/icons8-book-96.png'
+          <a href='/books/show/<%= book.id %>'><img src='/images/icons8-book-96.png'></a>
         <% } %>
         <% if (book.volumeInfo.industryIdentifiers[0]?.identifier) { %>
           <p class='book-description'>ISBN-10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
