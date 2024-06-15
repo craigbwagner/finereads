@@ -19,7 +19,11 @@
       <% book.volumeInfo.authors.forEach(author => { %>
         <a href='/books/results?author=<%= author %>'><h3 class='author-names'><%= author %></h3></a>
     <% })} %>
-    <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
+    <% if (book.volumeInfo.averageRating !== undefined) { %>
+      <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
+    <% } else { %>
+      <p><strong>No Google Books Rating</strong></p>
+    <% } %>
     <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
       <label for='shelf'>Add to Shelf:</label>
       <select name='shelf'>
@@ -57,8 +61,8 @@
     <% } %>
     <div>
       <h3>Book Details</h3>
-      <p>ISBN-10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
-      <p>ISBN-13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+      <p><strong>ISBN-10:</strong> <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+      <p><strong>ISBN-13:</strong> <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
       <p><strong>Publisher:</strong> <%= book.volumeInfo.publisher %></p>
       <p><strong>Year Published:</strong> <%= book.volumeInfo.publishedDate %></p>
       <p><strong>Page Count:</strong> <%= book.volumeInfo.pageCount %></p>
