@@ -7,5 +7,6 @@ router.get('/search', booksCtrl.bookSearch);
 router.get('/results', booksCtrl.searchResults);
 router.get('/show/:bookId', booksCtrl.showBook);
 router.post('/:bookId/users/:userId', booksCtrl.addToShelf);
+router.delete('/:bookId/users/:userId', booksCtrl.removeBook);
 
 module.exports = router;
