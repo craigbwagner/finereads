@@ -9,35 +9,34 @@
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1><%= currentUser.username %>'s Books</h1>
-  <div>
+  <div id='current-read-list'>
     <h2>Current reads:</h2>
     <div class='user-books'>
       <% currentReads.forEach(book => { %>
         <div>
-          <img src='<%= book.imageLink %>'>
-          <p><%= book.title %></p>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>'></a>
+          <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
     </div>
   </div>
-  <div>
+  <div id='want-to-read-list'>
     <h2>Want to Read:</h2>
     <div class='user-books'>
       <% toReads.forEach(book => { %>
-        <div>
-          <img src='<%= book.imageLink %>'>
-          <p><%= book.title %></p>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>'></a>
+          <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
     </div>
   </div>
-  <div>
+  <div id='read-books-list'>
     <h2>Read Books:</h2>
     <div class='user-books'>
       <% readBooks.forEach(book => { %>
         <div>
-          <img src='<%= book.imageLink %>'>
-          <p><%= book.title %></p>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>'></a>
+          <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
     </div>
