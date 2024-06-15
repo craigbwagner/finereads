@@ -15,9 +15,10 @@
     <img src='/images/icons8-book-96.png'
   <% } %>
   <div>
-    <% book.volumeInfo.authors.forEach(author => { %>
-      <h3 class='author-names'><%= author %></h3>
-    <% }) %>
+    <% if (book.volumeInfo?.authors) {%>
+      <% book.volumeInfo.authors.forEach(author => { %>
+        <h3 class='author-names'><%= author %></h3>
+    <% })} %>
     <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
     <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
       <label for='shelf'>Add to Shelf:</label>
@@ -46,12 +47,14 @@
     </div>
     <h3>Description</h3>
     <p class='book-description'><%- book.volumeInfo.description %></p>
-    <h3>Categories</h3>
-    <ul>
-      <% book.volumeInfo.categories.forEach(category => { %>
-        <li><%= category %></li>
-      <% }) %>
-    </ul>
+    <% if (book.volumeInfo?.categories) { %>
+      <h3>Categories</h3>
+      <ul>
+        <% book.volumeInfo.categories.forEach(category => { %>
+          <li><%= category %></li>
+        <% }) %>
+      </ul>
+    <% } %>
     <a href='<%= book.volumeInfo.canonicalVolumeLink %>' target='_blank'>View on Google Books</a>
   </div>
 </body>
