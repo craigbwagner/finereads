@@ -80,27 +80,41 @@ async function addToShelf(req, res) {
 		const currentUser = await User.findById(req.params.userId);
 		const selectedBookId = req.params.bookId;
 		const selectedBook = await googleBooksAPI.show(selectedBookId);
-		let bookDataPackage = {};
+        let isShelved = false;
 
-		console.log(selectedBook.volumeInfo.imageLinks.thumbnail);
+		currentUser.shelvedBooks.forEach((book) => {
+			if (selectedBookId === book.googleBooksId) {
+				isShelved = true;
+			}
+		});
 
-		bookDataPackage.googleBooksId = selectedBookId;
-		bookDataPackage.title = selectedBook.volumeInfo.title;
-		bookDataPackage.authors = selectedBook.volumeInfo.authors;
-		bookDataPackage.averageRating = selectedBook.volumeInfo.averageRating;
-		if (selectedBook.volumeInfo.imageLinks?.thumbnail) {
-			bookDataPackage.imageLink = selectedBook.volumeInfo.imageLinks.thumbnail;
+		if (!isShelved) {
+			let bookDataPackage = {};
+
+			bookDataPackage.googleBooksId = selectedBookId;
+			bookDataPackage.title = selectedBook.volumeInfo.title;
+			bookDataPackage.authors = selectedBook.volumeInfo.authors;
+			bookDataPackage.averageRating = selectedBook.volumeInfo.averageRating;
+			if (selectedBook.volumeInfo.imageLinks?.thumbnail) {
+				bookDataPackage.imageLink = selectedBook.volumeInfo.imageLinks.thumbnail;
+			}
+			bookDataPackage.isbn10 = selectedBook.volumeInfo.industryIdentifiers[0].identifier;
+			bookDataPackage.isbn13 = selectedBook.volumeInfo.industryIdentifiers[1].identifier;
+			bookDataPackage.publisher = selectedBook.volumeInfo.publisher;
+			bookDataPackage.publishedDate = selectedBook.volumeInfo.publishedDate;
+			bookDataPackage.pageCount = selectedBook.volumeInfo.pageCount;
+			bookDataPackage.description = selectedBook.volumeInfo.description;
+			bookDataPackage.shelf = req.body.shelf;
+			bookDataPackage.googleBooksUrl = selectedBook.volumeInfo.canonicalVolumeLink;
+
+			currentUser.shelvedBooks.push(bookDataPackage);
+		} else {
+			currentUser.shelvedBooks.forEach((book) => {
+				if (book.googleBooksId === selectedBookId) {
+					book.shelf = req.body.shelf;
+				}
+			});
 		}
-		bookDataPackage.isbn10 = selectedBook.volumeInfo.industryIdentifiers[0].identifier;
-		bookDataPackage.isbn13 = selectedBook.volumeInfo.industryIdentifiers[1].identifier;
-		bookDataPackage.publisher = selectedBook.volumeInfo.publisher;
-		bookDataPackage.publishedDate = selectedBook.volumeInfo.publishedDate;
-		bookDataPackage.pageCount = selectedBook.volumeInfo.pageCount;
-		bookDataPackage.description = selectedBook.volumeInfo.description;
-		bookDataPackage.shelf = req.body.shelf;
-		bookDataPackage.googleBooksUrl = selectedBook.volumeInfo.canonicalVolumeLink;
-
-		currentUser.shelvedBooks.push(bookDataPackage);
 		await currentUser.save();
 		res.redirect('/books/users/<%= req.params.userId %>');
 	} catch (err) {
