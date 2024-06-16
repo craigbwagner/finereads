@@ -55,6 +55,8 @@ async function showBook(req, res) {
 		const selectedBook = await googleBooksAPI.show(selectedBookId);
 		let isShelved = false;
 		let shelfStatus = 'to-read';
+		let rating = 5;
+		let review = '';
 
 		currentUser.shelvedBooks.forEach((book) => {
 			if (selectedBookId === book.googleBooksId) {
@@ -66,9 +68,16 @@ async function showBook(req, res) {
 				return book.googleBooksId === selectedBookId;
 			});
 			shelfStatus = shelvedBook[0].shelf;
+			if (shelvedBook[0]?.userRating) {
+				rating = shelvedBook[0].userRating;
+			}
+			console.log(shelvedBook[0].userReview);
+			if (shelvedBook[0]?.userReview) {
+				review = shelvedBook[0].userReview;
+			}
 		}
 
-		res.render('books/show.ejs', { book: selectedBook, currentUser, isShelved, shelfStatus });
+		res.render('books/show.ejs', { book: selectedBook, currentUser, isShelved, shelfStatus, rating, review });
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
@@ -80,7 +89,7 @@ async function addToShelf(req, res) {
 		const currentUser = await User.findById(req.params.userId);
 		const selectedBookId = req.params.bookId;
 		const selectedBook = await googleBooksAPI.show(selectedBookId);
-        let isShelved = false;
+		let isShelved = false;
 
 		currentUser.shelvedBooks.forEach((book) => {
 			if (selectedBookId === book.googleBooksId) {
@@ -116,10 +125,18 @@ async function addToShelf(req, res) {
 			});
 		}
 		await currentUser.save();
-		res.redirect('/books/users/<%= req.params.userId %>');
+		res.redirect('/books/show/${req.params.bookId}');
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
+	}
+}
+
+async function addReview(req, res) {
+	try {
+	} catch (err) {
+		console.log(err);
+		res.redirect('/books/show/${req.params.bookId}');
 	}
 }
 
@@ -143,5 +160,6 @@ module.exports = {
 	bookSearch,
 	searchResults,
 	addToShelf,
+	addReview,
 	removeBook,
 };
