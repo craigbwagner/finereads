@@ -9,33 +9,34 @@
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1><%= currentUser.username %>'s Books</h1>
-  <div id='current-read-list'>
+  <div class='shelf-container'>
     <h2>Current reads:</h2>
-    <div class='user-books'>
+    <div class='user-shelf'>
       <% currentReads.forEach(book => { %>
-        <div>
-          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>'></a>
+        <div class='shelved-book'>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover'></a>
           <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
     </div>
   </div>
-  <div id='want-to-read-list'>
+  <div class='shelf-container'>
     <h2>Want to Read:</h2>
-    <div class='user-books'>
+    <div class='user-shelf'>
       <% toReads.forEach(book => { %>
-          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>'></a>
+        <div class='shelved-book'>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover'></a>
           <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
     </div>
   </div>
-  <div id='read-books-list'>
+  <div class='shelf-container'>
     <h2>Read Books:</h2>
-    <div class='user-books'>
+    <div class='user-shelf'>
       <% readBooks.forEach(book => { %>
-        <div>
-          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>'></a>
+        <div class='shelved-book'>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover'></a>
           <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>

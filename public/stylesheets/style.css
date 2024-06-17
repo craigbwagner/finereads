@@ -119,10 +119,34 @@ button:hover {
     margin: 5px 0px;
 }
 
-#homepage-container {
+.shelf-container {
+    margin: 20px;
+}
+
+.user-shelf {
+    display: flex;
+}
+
+.shelved-book {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    align-content: center;
+    margin: 10px 20px;
+    max-width: 175px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.shelf-book-cover {
+    height: 250px;
+    justify-self: flex-start;
+}
+
+#homepage-container {
+    display: flex;
+    align-content: center;
 }
 
 #homepage-links {
