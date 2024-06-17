@@ -8,18 +8,22 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <div #id='search-container'>
+    <div id='search-container'>
       <h1>Search for Books</h1>
       <h3>Please fill out at least one of the fields below.</h3>
       <form action="/books/results" method="GET" id='search-form'>
-        <label for="title">Title:</label>
-        <input type="text" name="title" />
-        <br />
-        <label for='author'>Author:</label>
-        <input type="text" name='author'>
-        <br />
-        <label for='isbn'>ISBN:</label>
-        <input type="text" name='isbn'>
+        <div class='input-label-div'>
+          <label for="title">Title:</label>
+          <input type="text" name="title" />
+        </div>
+        <div class='input-label-div'>
+          <label for='author'>Author:</label>
+          <input type="text" name='author'>
+        </div>
+        <div class='input-label-div'>
+          <label for='isbn'>ISBN:</label>
+          <input type="text" name='isbn'>
+        </div>
         <br />
         <button type='submit' id='search-button'>Search</button>
       </form>
