@@ -1,11 +1,11 @@
 <nav>
   <a href='/' id='navbar-title'>Finereads</a>
   <% if(user) {%>
-  <a href='/books/search'>Search</a>
-  <a href="/books/users/<%=user._id%>">Your Books</a>
-  <a href="/auth/sign-out">Sign Out</a>
+  <a href='/books/search' class='navbar-link'>Search</a>
+  <a href="/books/users/<%=user._id%>" class='navbar-link'>Your Books</a>
+  <a href="/auth/sign-out" class='navbar-link'>Sign Out</a>
   <% } else { %>
-  <a href="/auth/sign-in">Sign In</a>
-  <a href="/auth/sign-up">Sign Up</a>
+  <a href="/auth/sign-in" class='navbar-link'>Sign In</a>
+  <a href="/auth/sign-up" class='navbar-link'>Sign Up</a>
   <% } %>
 </nav>
