@@ -122,6 +122,10 @@ button:hover {
     justify-content: center;
 }
 
+#navbar-title {
+    color: black;
+}
+
 #search-container {
     display: flex;
     flex-direction: column;
