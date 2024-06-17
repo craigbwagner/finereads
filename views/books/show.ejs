@@ -9,16 +9,16 @@
 <body>
   <%- include('../partials/_navbar.ejs') %>
   <h1><%= book.volumeInfo.title %></h1>
+  <% if (book.volumeInfo?.authors) {%>
+    <% book.volumeInfo.authors.forEach(author => { %>
+      <a href='/books/results?author=<%= author %>'><h3 class='author-names'><%= author %></h3></a>
+  <% })} %>
   <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
     <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
   <% } else {%>
     <img src='/images/icons8-book-96.png'
   <% } %>
   <div>
-    <% if (book.volumeInfo?.authors) {%>
-      <% book.volumeInfo.authors.forEach(author => { %>
-        <a href='/books/results?author=<%= author %>'><h3 class='author-names'><%= author %></h3></a>
-    <% })} %>
     <% if (book.volumeInfo.averageRating !== undefined) { %>
       <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
     <% } else { %>
