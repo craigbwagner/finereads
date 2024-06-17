@@ -5,14 +5,15 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #483939;
-    color: #fff;
+    background-color: #FEFAE0;
+    color: black;
 }
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: black;
 }
+
 
 input {
     font-family: 'Poppins', sans-serif;
@@ -24,7 +25,22 @@ nav {
     align-items: flex-start;
     gap: 20px;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #DDA15E;
+}
+
+button {
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    background: #283618;
+    text-decoration: none;
+}
+
+button:hover {
+    background: #606C38;
+    text-decoration: none;
 }
 
 #search-form {
