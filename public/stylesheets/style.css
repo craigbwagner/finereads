@@ -32,14 +32,13 @@ button {
     -webkit-border-radius: 10;
     -moz-border-radius: 10;
     border-radius: 10px;
-    color: #ffffff;
     font-size: 14px;
-    background: #283618;
+    background: #606C38;
     text-decoration: none;
 }
 
 button:hover {
-    background: #606C38;
+    background: #718042;
     text-decoration: none;
 }
 
