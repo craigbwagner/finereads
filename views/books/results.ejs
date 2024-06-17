@@ -31,7 +31,7 @@
           <p class='book-description'>ISBN-13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
         <% } %>
         <% if (book.searchInfo?.textSnippet) { %>
-          <p class='book-description'><%= book.searchInfo.textSnippet %></p>
+          <p class='book-description'><%- book.searchInfo.textSnippet %></p>
         <% } %>
       </div>
     <% }) %>
