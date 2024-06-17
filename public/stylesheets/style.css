@@ -10,7 +10,11 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
+    color: #606C38;
+}
+
+a:hover {
+    color: #6e832b;
 }
 
 input {
