@@ -4,6 +4,7 @@ const googleBooksAPI = require('../services/google-books-API');
 async function index(req, res) {
 	try {
 		const currentUser = await User.findById(req.session.user._id);
+
 		const toReads = currentUser.shelvedBooks.filter((book) => {
 			return book.shelf === 'to-read';
 		});
@@ -71,7 +72,6 @@ async function showBook(req, res) {
 			if (shelvedBook[0]?.userRating) {
 				rating = shelvedBook[0].userRating;
 			}
-			console.log(shelvedBook[0].userReview);
 			if (shelvedBook[0]?.userReview) {
 				review = shelvedBook[0].userReview;
 			}
@@ -125,7 +125,7 @@ async function addToShelf(req, res) {
 			});
 		}
 		await currentUser.save();
-		res.redirect('/books/show/${req.params.bookId}');
+		res.redirect(`/books/show/${req.params.bookId}`);
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
@@ -134,9 +134,20 @@ async function addToShelf(req, res) {
 
 async function addReview(req, res) {
 	try {
+		const currentUser = await User.findById(req.params.userId);
+		const selectedBookId = req.params.bookId;
+
+		currentUser.shelvedBooks.forEach((book) => {
+			if (book.googleBooksId === selectedBookId) {
+				book.userRating = req.body.rating;
+				book.userReview = req.body.review;
+			}
+		});
+		await currentUser.save();
+		res.redirect(`/books/show/${req.params.bookId}`);
 	} catch (err) {
 		console.log(err);
-		res.redirect('/books/show/${req.params.bookId}');
+		res.redirect(`/books/show/${req.params.bookId}`);
 	}
 }
 
