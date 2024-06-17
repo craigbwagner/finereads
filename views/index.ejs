@@ -8,7 +8,26 @@
 </head>
 <body>
   <%- include('./partials/_navbar.ejs') %>
-  <h1>Welcome to Finereads</h1>
-  <p>Like goodreads, but it's fine.</p>
+  <div id='homepage-container'>
+    <h1>Welcome to Finereads</h1>
+    <h2>Like goodreads, but it's fine.</h2>
+    <div id='#homepage-links'>
+      <% if(user) {%>
+        <div class='homepage-link'>
+          <a href='/books/search'>Search</a>
+        </div>
+        <div class='homepage-link'>
+          <a href="/books/users/<%=user._id%>">See your Books</a>
+        </div>
+      <% } else { %>
+        <div class='homepage-link'>
+          <p>Already have an account? <a href="/auth/sign-in">Sign In</a></p>
+        </div>
+        <div class='homepage-link'>
+          <p>New here? <a href="/auth/sign-up">Sign Up</a></p>
+        </div>
+      <% } %>
+    </div>
+  </div>
 </body>
 </html>

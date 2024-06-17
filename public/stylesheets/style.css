@@ -2,10 +2,20 @@
 
 body {
     font-family: 'Poppins', sans-serif;
+    font-size: 18px;
     margin: 0;
     padding: 0;
     background-color: #FEFAE0;
     color: black;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 20px 0px 15px;
+}
+
+h2 {
+    margin: 20px 0px;
 }
 
 a {
@@ -18,7 +28,6 @@ a:hover {
 }
 
 input {
-	font-size: 14px;
 	padding: 2px 7px;
 	width: 300px;
 	outline: none;
@@ -37,7 +46,7 @@ input:focus {
 }
 
 textarea {
-	font-size: 14px;
+    font-family: 'Poppins', sans-serif;
 	padding: 2px 7px;
 	width: 300px;
 	outline: none;
@@ -50,7 +59,6 @@ textarea {
 }
 
 select {
-	font-size: 14px;
 	padding: 2px 7px;
 	width: 300px;
 	outline: none;
@@ -74,7 +82,6 @@ nav {
 button {
     font-weight: bold;
     color: #000000 !important;
-    font-size: 14px;
     padding: 11px 27px;
     border-radius:11px;
     outline: none;
@@ -86,10 +93,29 @@ button:hover {
     background: #718042;
 }
 
+.navbar-link {
+    color: black;
+    border: 1px black;
+}
+
+.homepage-link {
+    display: flex;
+    justify-content: center;
+    margin: 5px 0px;
+    padding: 1px 0px;
+}
+
 #homepage-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#homepage-links {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 
 #search-container {
