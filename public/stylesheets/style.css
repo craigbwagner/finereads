@@ -227,6 +227,11 @@ button:hover {
     justify-content: space-evenly;
 }
 
+.delete-form {
+    display: flex;
+    justify-content: center;
+}
+
 .review-form {
     display: flex;
     flex-direction: column;
