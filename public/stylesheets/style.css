@@ -20,6 +20,10 @@ h2 {
     margin: 20px 0px;
 }
 
+h3 {
+    margin: 0px;
+}
+
 p {
     margin: 0;
 }
@@ -195,6 +199,53 @@ button:hover {
     -webkit-box-orient: vertical;
 }
 
+.show-title {
+    padding: 0px 25px;
+    margin: 15px 0px 0px;
+}
+
+.show-authors {
+    padding: 0px 25px;
+    margin: 0px 0px 15px;
+}
+
+.show-cover {
+    height: 400px;
+    width: 267px;
+    padding: 0px 35px;
+}
+
+.shelf-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 25px;
+    height: 200px;
+    justify-content: space-evenly;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 25px;
+    height: 250px;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+
+.show-details {
+    padding: 25px 25px 0px;
+}
+
+.show-description {
+    padding: 25px;
+}
+
+.show-categories {
+    padding: 0px 25px;
+}
+
 #homepage-container {
     display: flex;
     align-content: center;
@@ -232,4 +283,14 @@ button:hover {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+#show-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#google-books-link {
+    padding: 25px
 }

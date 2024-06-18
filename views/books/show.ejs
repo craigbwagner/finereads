@@ -8,76 +8,86 @@
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1><%= book.volumeInfo.title %></h1>
-  <% if (book.volumeInfo?.authors) {%>
-    <% book.volumeInfo.authors.forEach(author => { %>
-      <a href='/books/results?author=<%= author %>'><h3 class='author-names'><%= author %></h3></a>
-  <% })} %>
-  <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
-    <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'>
-  <% } else {%>
-    <img src='/images/icons8-book-96.png'
-  <% } %>
-  <div>
-    <% if (book.volumeInfo.averageRating !== undefined) { %>
-      <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
-    <% } else { %>
-      <p><strong>No Google Books Rating</strong></p>
-    <% } %>
-    <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST'>
-      <label for='shelf'>Add to Shelf:</label>
-      <select name='shelf'>
-        <% if (shelfStatus === 'to-read') { %>
-          <option value="to-read" selected>Want to Read</option>
-        <% } else { %>
-          <option value='to-read'>Want to Read</option>
-        <% } %>
-        <% if (shelfStatus === 'reading') { %>
-          <option value="reading" selected>Reading</option>
-        <% } else { %>
-          <option value='reading'>Reading</option>
-        <% } %>
-        <% if (shelfStatus === 'read') { %>
-          <option value="read" selected>Read</option>
-        <% } else { %>
-          <option value='read'>Read</option>
-        <% } %>
-      </select>
-      <button type='submit'>Shelve Book</button>
-    </form>
-    <% if (isShelved) { %>
-      <form action="/books/<%= book.id %>/users/<%= currentUser.id %>?_method=DELETE" method='POST'>
-        <button type='submit'>Remove from Shelves</button>
-      </form>
-      <form action="/books/<%= book.id %>/users/<%= currentUser.id %>/reviews" method="POST">
-        <label for='rating'>Rating:</label>
-        <input type='number' name='rating' min='1' max='5' value='<%= rating %>' required>
-        <br />
-        <label for='review'>Review:</label>
-        <textarea name='review'><%= review %></textarea>
-        <br />
-        <button type='submit'>Submit Review</button>
-      </form>
+  <div id='show-container'>
+    <h1 class='show-title'><%= book.volumeInfo.title %></h1>
+    <% if (book.volumeInfo?.authors) {%>
+      <% book.volumeInfo.authors.forEach(author => { %>
+        <div ></div>
+        <a href='/books/results?author=<%= author %>' class='show-authors'>
+          <h3 class='author-names'>
+            <%= author %>
+          </h3>
+        </a>
+    <% })} %>
+    <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
+      <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover' class='show-cover'>
+    <% } else {%>
+      <img src='/images/icons8-book-96.png'>
     <% } %>
     <div>
-      <h3>Book Details</h3>
-      <p><strong>ISBN-10:</strong> <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
-      <p><strong>ISBN-13:</strong> <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
-      <p><strong>Publisher:</strong> <%= book.volumeInfo.publisher %></p>
-      <p><strong>Year Published:</strong> <%= book.volumeInfo.publishedDate %></p>
-      <p><strong>Page Count:</strong> <%= book.volumeInfo.pageCount %></p>
+      <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST' class='shelf-form'>
+        <% if (book.volumeInfo.averageRating !== undefined) { %>
+          <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
+        <% } else { %>
+          <p><strong>No Google Books Rating</strong></p>
+        <% } %>
+        <label for='shelf'>Add to Shelf:</label>
+        <select name='shelf'>
+          <% if (shelfStatus === 'to-read') { %>
+            <option value="to-read" selected>Want to Read</option>
+          <% } else { %>
+            <option value='to-read'>Want to Read</option>
+          <% } %>
+          <% if (shelfStatus === 'reading') { %>
+            <option value="reading" selected>Reading</option>
+          <% } else { %>
+            <option value='reading'>Reading</option>
+          <% } %>
+          <% if (shelfStatus === 'read') { %>
+            <option value="read" selected>Read</option>
+          <% } else { %>
+            <option value='read'>Read</option>
+          <% } %>
+        </select>
+        <button type='submit'>Shelve Book</button>
+        <form action="/books/<%= book.id %>/users/<%= currentUser.id %>?_method=DELETE" method='POST'
+          class='delete-form'>
+          <button type='submit'>Remove from Shelves</button>
+        </form>
+      </form>
+      <% if (isShelved) { %>
+        <form action="/books/<%= book.id %>/users/<%= currentUser.id %>/reviews" method="POST" class='review-form'>
+          <label for='rating'>Rating:</label>
+          <input type='number' name='rating' min='1' max='5' value='<%= rating %>' required>
+          <label for='review'>Review:</label>
+          <textarea name='review'><%= review %></textarea>
+          <button type='submit'>Submit Review</button>
+        </form>
+      <% } %>
+      <div class='show-details'>
+        <h3>Book Details</h3>
+        <p><strong>ISBN-10:</strong> <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
+        <p><strong>ISBN-13:</strong> <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
+        <p><strong>Publisher:</strong> <%= book.volumeInfo.publisher %></p>
+        <p><strong>Year Published:</strong> <%= book.volumeInfo.publishedDate %></p>
+        <p><strong>Page Count:</strong> <%= book.volumeInfo.pageCount %></p>
+      </div>
+      <div class='show-description'>
+        <h3>Description</h3>
+        <p class='book-description'><%- book.volumeInfo.description %></p>
+      </div>
+      <% if (book.volumeInfo?.categories) { %>
+        <div class='show-categories'>
+          <h3>Categories</h3>
+          <ul>
+            <% book.volumeInfo.categories.forEach(category => { %>
+              <li><%= category %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+      <a href='<%= book.volumeInfo.canonicalVolumeLink %>' target='_blank' id='google-books-link'>View on Google Books</a>
     </div>
-    <h3>Description</h3>
-    <p class='book-description'><%- book.volumeInfo.description %></p>
-    <% if (book.volumeInfo?.categories) { %>
-      <h3>Categories</h3>
-      <ul>
-        <% book.volumeInfo.categories.forEach(category => { %>
-          <li><%= category %></li>
-        <% }) %>
-      </ul>
-    <% } %>
-    <a href='<%= book.volumeInfo.canonicalVolumeLink %>' target='_blank'>View on Google Books</a>
   </div>
 </body>
 </html>
