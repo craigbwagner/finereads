@@ -22,7 +22,7 @@
     <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
       <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover' class='show-cover'>
     <% } else {%>
-      <img src='/images/icons8-book-96.png'>
+      <img src='/images/icons8-book-96.png' alt='stock book image'>
     <% } %>
     <div>
       <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST' class='shelf-form'>

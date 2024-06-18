@@ -14,7 +14,7 @@
     <div class='user-shelf'>
       <% currentReads.forEach(book => { %>
         <div class='shelved-book'>
-          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover'></a>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover' alt='book cover'></a>
           <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
@@ -25,7 +25,7 @@
     <div class='user-shelf'>
       <% toReads.forEach(book => { %>
         <div class='shelved-book'>
-          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover'></a>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover' alt='book cover'></a>
           <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
@@ -36,7 +36,7 @@
     <div class='user-shelf'>
       <% readBooks.forEach(book => { %>
         <div class='shelved-book'>
-          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover'></a>
+          <a href='/books/show/<%= book.googleBooksId %>'><img src='<%= book.imageLink %>' class='shelf-book-cover' alt='book cover'></a>
           <a href='/books/show/<%= book.googleBooksId %>'><%= book.title %></p></a>
         </div>
       <% }) %>
