@@ -8,33 +8,59 @@
 </head>
 <body>
   <%- include('../partials/_navbar.ejs') %>
-  <h1>Search Results</h1>
-  <a href='/books/search'>Search again</a>
-  <div id='search-results-container'>
-    <% searchResults.items.forEach(book => { %>
-      <div class='book-container'>
-        <a href='/books/show/<%= book.id %>'><h2><%= book.volumeInfo.title %></h2></a>
-        <% if (book.volumeInfo?.authors) {%>
-          <% book.volumeInfo.authors.forEach(author => { %>
-            <a href='/books/results?author=<%= author %>'><h4 class='author-names'><%= author %></h4></a>
-        <% })} %>
-        <h3><%= book.volumeInfo.author %></h3>
-        <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
-          <a href='/books/show/<%= book.id %>'><img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover'></a>
-        <% } else {%>
-          <a href='/books/show/<%= book.id %>'><img src='/images/icons8-book-96.png'></a>
-        <% } %>
-        <% if (book.volumeInfo.industryIdentifiers[0]?.identifier) { %>
-          <p class='book-description'>ISBN-10: <%= book.volumeInfo.industryIdentifiers[0].identifier %></p>
-        <% } %>
-        <% if (book.volumeInfo.industryIdentifiers[1]?.identifier) { %>
-          <p class='book-description'>ISBN-13: <%= book.volumeInfo.industryIdentifiers[1].identifier %></p>
-        <% } %>
-        <% if (book.searchInfo?.textSnippet) { %>
-          <p class='book-description'><%- book.searchInfo.textSnippet %></p>
-        <% } %>
-      </div>
-    <% }) %>
+  <div id='results-page'>
+    <h1>Search Results</h1>
+    <a href='/books/search'>Search again</a>
+    <div id='search-results-container'>
+      <% searchResults.items.forEach(book => { %>
+        <div class='book-container'>
+          <a href='/books/show/<%= book.id %>'>
+            <h2 class='results-title'>
+              <%= book.volumeInfo.title %>
+            </h2>
+          </a>
+          <% if (book.volumeInfo?.authors) {%>
+            <div class='results-authors'>
+              <% book.volumeInfo.authors.forEach(author => { %>
+                <a href='/books/results?author=<%= author %>'>
+                  <h4 class='results-author'>
+                    <%= author %>
+                  </h4>
+                </a>
+              <% }) %>
+            </div>
+          <%} %>
+          <div>
+            <% if (book.volumeInfo.imageLinks?.thumbnail) {%>
+              <a href='/books/show/<%= book.id %>'>
+                <img src='<%= book.volumeInfo.imageLinks.thumbnail %>' alt='book cover' class='results-cover'>
+              </a>
+            <% } else {%>
+              <a href='/books/show/<%= book.id %>'>
+                <img src='/images/icons8-book-96.png' class='results-cover'>
+              </a>
+            <% } %>
+          </div>
+          <div class='results-isbns'>
+            <% if (book.volumeInfo.industryIdentifiers[0]?.identifier) { %>
+                <p class='book-description'>
+                  ISBN-10: <%= book.volumeInfo.industryIdentifiers[0].identifier %>
+                </p>
+              <% } %>
+              <% if (book.volumeInfo.industryIdentifiers[1]?.identifier) { %>
+                <p class='book-description'>
+                  ISBN-13: <%= book.volumeInfo.industryIdentifiers[1].identifier %>
+                </p>
+                <% } %>
+            </div>
+            <div class='results-description'>
+              <% if (book.volumeInfo.description) { %>
+                <p class='results-description'><%- book.volumeInfo.description %></p>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
+    </div>
   </div>
 </body>
 </html>
