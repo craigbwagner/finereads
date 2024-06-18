@@ -26,11 +26,15 @@
     <% } %>
     <div>
       <% if (book.volumeInfo.averageRating !== undefined) { %>
-        <p><strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5</p>
+        <p class='book-rating'>
+          <strong>Average Google Books Rating:</strong> <%= book.volumeInfo.averageRating %>/5
+        </p>
         <% } else { %>
-          <p><strong>No Google Books Rating</strong></p>
+          <p class='book-rating'>
+            <strong>No Google Books Rating</strong>
+          </p>
       <% } %>
-      <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST' class='shelf-form'>-
+      <form action='/books/<%= book.id %>/users/<%= currentUser.id %>' method='POST' class='shelf-form'>
         <label for='shelf'>Add to Shelf:</label>
         <select name='shelf'>
           <% if (shelfStatus === 'to-read') { %>
