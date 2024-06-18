@@ -36,4 +36,4 @@ Hosted by Heroku
 
 ## Next Steps
 
-Future enhancements would include the ability to filter and sort search results, showing more than the first 20 search results with a "next" and "back" button, better formatting of API data, the ability to view different editions of the same book in order to choose which one to shelve, and a more mobile-friendly site.
+Future enhancements would include the ability to filter and sort search results, showing more than the first 20 search results with a "next" and "back" button, better formatting of API data, the ability to view different editions of the same book in order to choose which one to shelve, and a more responsive site.
