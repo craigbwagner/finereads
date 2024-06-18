@@ -248,7 +248,8 @@ button:hover {
 
 #homepage-container {
     display: flex;
-    align-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 #homepage-links {
@@ -262,12 +263,6 @@ button:hover {
     color: black;
 }
 
-#search-results-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 #search-form {
     display: flex;
     flex-direction: column;
@@ -277,6 +272,18 @@ button:hover {
 #search-button {
     margin-top: 10px;
     align-self: center;
+}
+
+#search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#search-results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #results-page {
