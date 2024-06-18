@@ -158,16 +158,17 @@ button:hover {
 .book-container {
     display: flex;
     flex-direction: column;
-    justify-items: space-between;
+    justify-content: space-between;
     align-items: center;
     width: 500px;
     height: fit-content;
-    margin-bottom: 20px;
+    margin: 10px;
 }
 
 .results-title {
     margin: 5px;
     padding: 0px;
+    text-align: center;
 }
 
 .results-author {
@@ -194,6 +195,7 @@ button:hover {
     word-wrap: break-word;
     text-overflow: ellipsis;
     text-align: center;
+
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
