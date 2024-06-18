@@ -161,7 +161,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     width: 500px;
-    height: fit-content;
+    height: 580px;
     margin: 10px;
 }
 
@@ -191,11 +191,12 @@ button:hover {
 }
 
 .results-description {
+    display: flex;
     overflow: hidden;
     word-wrap: break-word;
     text-overflow: ellipsis;
     text-align: center;
-
+    align-items: center;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
